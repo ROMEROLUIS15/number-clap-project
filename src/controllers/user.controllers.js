@@ -1,11 +1,11 @@
-const catchError = require('../../utils/catchError.js')
+const catchError = require('../utils/catchError.js')
 const monthlySurvey = require('../models/monthlySurvey.js')
 const User = require('../models/User.js')
 const numberClap = require('../models/numberClap.js')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const blackList = require('../../utils/blackList.js')
-const { extractToken, isTokenValid } = require('../../utils/authUtils.js')
+const blackList = require('../utils/blackList.js')
+const { extractToken, isTokenValid } = require('../utils/authUtils.js')
 const SendCode = require('../models/SendCode.js')
 
 const getAllUsers = catchError(async(req, res) => {

@@ -1,9 +1,9 @@
 const SendCode = require('../models/SendCode.js');
 const VerifyCodeSended = require('../models/VerifyCodeSended.js');
-const sendVerificationEmail = require('../../utils/emailService.js'); // Asegúrate de que esta función esté importada
-const catchError = require('../../utils/catchError.js');
+const sendVerificationEmail = require('../utils/emailService.js'); // Asegúrate de que esta función esté importada
+const catchError = require('../utils/catchError.js');
 
-//variable para enviar codigo con letras minusculas y mayusculas al email
+//variable para enviar codigo con letras minusculas, mayusculas y numeros al email
 const generateVerificationCode = (length) => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let code = '';

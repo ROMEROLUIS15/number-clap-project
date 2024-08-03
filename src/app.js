@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
-const errorHandler = require('../utils/errorHandler.js')
+const errorHandler = require('./utils/errorHandler')
 const router = require('./routes')
 
 const app = express()

@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize')
-const sequelize = require('../../utils/connection')
+const sequelize = require('../utils/connection')
 
 const monthlySurvey = sequelize.define('monthlySurvey',{
     rice: {

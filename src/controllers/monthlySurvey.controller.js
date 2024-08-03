@@ -1,4 +1,4 @@
-const catchError = require('../../utils/catchError.js')
+const catchError = require('../utils/catchError.js')
 const monthlySurvey = require('../models/monthlySurvey.js')
 
 const getAllSurvey = catchError(async(req,res) => {

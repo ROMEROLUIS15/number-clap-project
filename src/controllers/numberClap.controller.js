@@ -1,4 +1,4 @@
-const catchError = require('../../utils/catchError.js')
+const catchError = require('../utils/catchError.js')
 const numberClap = require('../models/numberClap.js')
 const User = require('../models/User.js')
 

@@ -1,5 +1,5 @@
 const VerifyCodeSended = require('../models/VerifyCodeSended.js');
-const catchError = require('../../utils/catchError.js');
+const catchError = require('../utils/catchError.js');
 
 const verifyCodeFromRegister = catchError(async (req, res) => {
     const { email, code } = req.body;
