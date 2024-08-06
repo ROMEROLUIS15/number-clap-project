@@ -1,8 +1,7 @@
-// models/VerifyCodeSended.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../utils/connection.js');
 
-const VerifyCodeSended = sequelize.define('VerifyCodeSended', {
+const VerificationCode = sequelize.define('VerificationCode', {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -16,4 +15,4 @@ const VerifyCodeSended = sequelize.define('VerifyCodeSended', {
     },
 });
 
-module.exports = VerifyCodeSended;
+module.exports = VerificationCode;

@@ -1,24 +1,34 @@
-const jwt = require('jsonwebtoken')
-const blackList = require('./blackList')
+const jwt = require('jsonwebtoken');
+const blackList = require('./blackList');
 require('dotenv').config();
 
 const verifyJWT = (req, res, next) => {
-    const authHeader = req.headers.authorization || req.headers.Authorization
-    if (!authHeader?.startsWith('Bearer ')) return res.sendStatus(401)
-    const token = authHeader.split(' ')[1] 
+    const authHeader = req.headers.authorization || req.headers.Authorization;
+    if (!authHeader?.startsWith('Bearer ')) {
+        console.log('No token provided or token is invalid');
+        return res.status(401).json({ message: 'No token provided or token is invalid' });
+    }
 
-    if (blackList.has(token)) return res.sendStatus(403)
+    const token = authHeader.split(' ')[1];
+
+    if (blackList.has(token)) {
+        console.log('Token has already been used for logout');
+        return res.status(403).json({ message: 'Token has already been used for logout' });
+    }
 
     jwt.verify(
         token,
         process.env.TOKEN_SECRET,
         (err, decoded) => {
-            if (err) return res.sendStatus(403);
-            req.user = decoded.user
-            next()
+            if (err) {
+                console.log('Token is invalid or expired');
+                return res.status(403).json({ message: 'Token is invalid or expired' });
+            }
+            console.log('Decoded token:', decoded);
+            req.user = decoded;
+            next();
         }
-    )
-}
+    );
+};
 
-
-module.exports = verifyJWT
+module.exports = verifyJWT;

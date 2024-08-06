@@ -1,26 +1,29 @@
-const express = require('express')
-const { getAllUsers, createUser, getUser, updateUser, deleteUser, login, logout, getLoggedUser } = require('../controllers/user.controllers')
-const verifyJWT = require('../utils/verifyJWT.js')
+// routes/user.routes.js
+const express = require('express');
+const { createUser, verifyUser, getAllUsers, getUser, updateUser, deleteUser, login, logout, getLoggedUser } = require('../controllers/user.controllers');
+const verifyJWT = require('../utils/verifyJWT.js');
 
-const userRouter = express.Router()
+const userRouter = express.Router();
 
 userRouter.route('/users')
-.get(getAllUsers)
-.post(createUser)
+    .get(getAllUsers)
+    .post(createUser);
+
+userRouter.route('/users/verify-code-register')
+    .post(verifyUser);
 
 userRouter.route('/users/login')
-.post(login)
+    .post(login);
 
 userRouter.route('/users/me')
-.get(verifyJWT, getLoggedUser)
+    .get(verifyJWT,getLoggedUser);
 
 userRouter.route('/users/logout')
-.post(logout)
+    .post(logout);
 
 userRouter.route('/users/:id')
-.get(verifyJWT, getUser)
-.patch(updateUser)
-.delete(deleteUser)
+    .get(verifyJWT, getUser)
+    .patch(updateUser)
+    .delete(deleteUser);
 
-
-module.exports = userRouter
+module.exports = userRouter;
