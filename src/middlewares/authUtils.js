@@ -1,4 +1,4 @@
-const blackList = require("./blackList");
+const blackList = require("../utils/blackList");
 
 const extractToken = (authHeader) => {
     if (!authHeader || !authHeader.startsWith('Bearer ')) {

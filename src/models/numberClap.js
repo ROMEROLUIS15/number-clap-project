@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize')
-const sequelize = require('../utils/connection')
+const sequelize = require('../config/connection')
 
 const numberClap = sequelize.define('numberClap',{
     uniqueNumberClap: {

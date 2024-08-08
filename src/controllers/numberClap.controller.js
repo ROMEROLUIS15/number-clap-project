@@ -1,4 +1,4 @@
-const catchError = require('../utils/catchError.js')
+const catchError = require('../middlewares/catchError.js')
 const numberClap = require('../models/numberClap.js')
 const User = require('../models/User.js')
 
@@ -30,7 +30,7 @@ const getOneNumberClap = catchError(async(req,res) => {
         include: [{model: User,
             attributes: ["name", "phone"] }]
             })
-            return res.json(result)
+    return res.json(result)
 })
 
 const updateNumberClap = catchError(async(req,res) => {
@@ -47,10 +47,10 @@ const updateNumberClap = catchError(async(req,res) => {
 })
 
 const getUserByUniqueNumberClap = catchError(async (req, res) => {
-    const { uniqueNumberClap } = req.body;
+    const { uniqueNumberClap } = req.body
 
     if (!uniqueNumberClap) {
-        return res.status(400).json({ error: "Reference number is required" });
+        return res.status(400).json({ error: "Reference number is required" })
     }
 
     const numberClapEntry = await numberClap.findOne({
@@ -62,23 +62,18 @@ const getUserByUniqueNumberClap = catchError(async (req, res) => {
         }]
     })
 
-        //console.log("numberClapEntry:", numberClapEntry); // Agrega un log para depurar
-
     if (!numberClapEntry) {
-        return res.status(404).json({ error: "NumberClap not found" });
+        return res.status(404).json({ error: "NumberClap not found" })
     }
 
-        const user = numberClapEntry.user; // Asegúrate de usar el alias correcto
+    const user = numberClapEntry.user // Asegúrate de usar el alias correcto
 
-        //console.log("User:", user); // Agrega un log para depurar
+    if (!user) {
+        return res.status(404).json({ error: "User not found for the provided NumberClap" })
+    }
 
-        if (!user) {
-             return res.status(404).json({ error: "User not found for the provided NumberClap" });
-         }
-
-        return res.json(numberClapEntry.user);
+    return res.json(numberClapEntry.user)
 })
-
 
 module.exports = {
     getAllNumber,

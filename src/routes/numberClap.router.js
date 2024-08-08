@@ -1,6 +1,6 @@
 const express = require('express')
 const { getAllNumber, createNumberClap, getOneNumberClap, updateNumberClap, getUserByUniqueNumberClap } = require('../controllers/numberClap.controller')
-const verifyJWT = require('../utils/verifyJWT.js')
+const verifyJWT = require('../middlewares/verifyJWT');
 
 const numberClapRouter = express.Router()
 

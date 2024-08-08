@@ -29,7 +29,7 @@
 
 const nodemailer = require('nodemailer')
 require('dotenv').config()
-const generateEmailTemplate = require('../utils/generateEmailTemplate'); // Asegúrate de importar la función
+const generateEmailTemplate = require('./generateEmailTemplate'); // Asegúrate de importar la función
 
 const sendVerificationCode = async (email, code) => {
   const transporter = nodemailer.createTransport({

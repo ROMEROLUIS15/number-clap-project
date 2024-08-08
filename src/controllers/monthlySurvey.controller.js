@@ -1,15 +1,20 @@
-const catchError = require('../utils/catchError.js')
-const monthlySurvey = require('../models/monthlySurvey.js')
+const catchError = require('../middlewares/catchError')
+const monthlySurvey = require('../models/monthlySurvey')
 
-const getAllSurvey = catchError(async(req,res) => {
+const getAllSurvey = catchError(async (req, res) => {
     const survey = await monthlySurvey.findAll()
-    res.status(200).json(survey)
+    res.json(survey)
 })
 
-const createSurvey = catchError(async(req,res) => {
+const createSurvey = catchError(async (req, res) => {
     const { rice, oil, sugar, milk, canned, cornmeal, userId } = req.body
-    const survey = await monthlySurvey.create({rice, oil, sugar, milk, canned, cornmeal, userId})
-    res.status(200).json(survey)
+
+    if (!rice || !oil || !sugar || !milk || !canned || !cornmeal || !userId) {
+        return res.status(400).json({ error: 'All fields are required' })
+    }
+
+    const survey = await monthlySurvey.create({ rice, oil, sugar, milk, canned, cornmeal, userId })
+    res.status(201).json(survey)
 })
 
 module.exports = {

@@ -17,6 +17,11 @@ app.get('/', (req,res) => {
     return res.send('number clap')
 })
 
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: 'Something went wrong!' });
+})
+
 app.use(errorHandler)
 
 module.exports = app
